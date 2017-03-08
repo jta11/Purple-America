@@ -98,7 +98,8 @@ class Painting extends JPanel {
 	
     private static final long serialVersionUID = 1L;
  
-    public Painting() {
+    public Painting() 
+    {
         setBackground(Color.WHITE);
     }
 
@@ -115,7 +116,6 @@ class Painting extends JPanel {
 		
 		catch (FileNotFoundException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -141,7 +141,6 @@ class Painting extends JPanel {
 			
 			catch (FileNotFoundException e) 
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -154,8 +153,8 @@ class Painting extends JPanel {
 				getStateColors(in3);
 			} 
 			
-			catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
+			catch (FileNotFoundException e) 
+			{
 				e.printStackTrace();
 			}
 			
@@ -223,6 +222,7 @@ class Painting extends JPanel {
 					{
 						path.lineTo(num2,  num1);
 					}
+					
 					//System.out.println(num1 + " " + num2);
 				}
 			}
