@@ -102,7 +102,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.MouseInputListener;
 import javax.swing.filechooser.FileFilter;
-
+//bye
 public final class DrawingPanel extends FileFilter
     implements ActionListener, MouseMotionListener, Runnable, WindowListener {
     // inner class to represent one frame of an animated GIF
