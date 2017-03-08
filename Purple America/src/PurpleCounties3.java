@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.io.File;
@@ -15,36 +17,78 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class PurpleCounties3 {
 	
     public static void main(String[] args) {
-        Frame3 test_frame = new Frame3();
+        Frame test_frame = new Frame();
     }
 }
 
-class Frame3 extends JFrame {
+class Frame extends JFrame {
     private static final long serialVersionUID = 1L;
 
-    Painting4 painting = new Painting4();
+    Painting painting = new Painting();
 
-    public Frame3() {
+    public Frame() {
         JFrame gui = new JFrame();
         gui.setTitle("Purple");
         
-        gui.setSize(950, 450);
+        gui.setSize(950, 495);
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+        JMenuBar menubar = new JMenuBar();
+        gui.setJMenuBar(menubar);
+        
+        JMenu year = new JMenu("Year");
+        
+        JMenuItem y1 = new JMenuItem("1960");
+        JMenuItem y2 = new JMenuItem("1964");
+        JMenuItem y3 = new JMenuItem("1968");
+        JMenuItem y4 = new JMenuItem("1972");
+        JMenuItem y5 = new JMenuItem("1976");
+        JMenuItem y6 = new JMenuItem("1980");
+        JMenuItem y7 = new JMenuItem("1984");
+        JMenuItem y8 = new JMenuItem("1988");
+        JMenuItem y9 = new JMenuItem("1992");
+        JMenuItem y10 = new JMenuItem("1996");
+        JMenuItem y11 = new JMenuItem("2000");
+        JMenuItem y12 = new JMenuItem("2004");
+        JMenuItem y13 = new JMenuItem("2008");
+        JMenuItem y14 = new JMenuItem("2012");
+        
+        year.add(y1);
+        year.add(y2);
+        year.add(y3);
+        year.add(y4);
+        year.add(y5);
+        year.add(y6);
+        year.add(y7);
+        year.add(y8);
+        year.add(y9);
+        year.add(y10);
+        year.add(y11);
+        year.add(y12);
+        year.add(y13);
+        year.add(y14);
+        
+        menubar.add(year);
+        
         Container pane = gui.getContentPane();
         pane.setLayout(new GridLayout(1, 1));
 
         pane.add(painting);
+        
         gui.setVisible(true);
     }
 }
 
-class Painting4 extends JPanel {
+class Painting extends JPanel {
 	
 	private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
 	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
@@ -54,7 +98,7 @@ class Painting4 extends JPanel {
 	
     private static final long serialVersionUID = 1L;
  
-    public Painting4() {
+    public Painting() {
         setBackground(Color.WHITE);
     }
 
@@ -82,25 +126,9 @@ class Painting4 extends JPanel {
 		g2d.setTransform(transform);
 		transform.scale(13, 16);
 		transform.rotate(Math.toRadians(270));
-		transform.translate(-50, 125);
-		
-		File f2 = new File("data\\USA2012.txt");
-		Scanner in;
-		try
-		{
-			in = new Scanner(f2);
-			get2012Colors(in);
-		} 
-		
-		catch (FileNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		transform.translate(-53, 125);
 		
 		int indx = 0;
-		
-		
 		String[] states = {"AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 		for(int j = 0; j < states.length; j++) {
 			File count = new File("data\\" + states[j] + ".txt");
@@ -118,12 +146,12 @@ class Painting4 extends JPanel {
 			}
 			
 			
-			File f4 = new File("data\\" + states[j] + "1968.txt");
+			File f4 = new File("data\\" + states[j] + "1992.txt");
 			Scanner in3;
 			try 
 			{
 				in3 = new Scanner(f4);
-				get2012Colors(in3);
+				getStateColors(in3);
 			} 
 			
 			catch (FileNotFoundException e) {
@@ -261,7 +289,7 @@ class Painting4 extends JPanel {
 		}
 	}
 	
-    public static void get2012Colors(Scanner input)
+    public static void getStateColors(Scanner input)
 	{
 		input.nextLine();
 		int s = 0;
