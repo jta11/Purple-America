@@ -18,7 +18,7 @@ public class PurpleCounties3
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		File f = new File("C:\\Users\\mcaten\\Downloads\\USA.txt");
+		File f = new File("Data\\USA.txt");
 		Scanner input = new Scanner(f);
 		getPoints(input);
 		
@@ -34,18 +34,18 @@ public class PurpleCounties3
 		transform.rotate(Math.toRadians(270));
 		transform.translate(-50, 125);
 		
-		File f2 = new File("C:\\Users\\mcaten\\Downloads\\USA2012.txt");
+		File f2 = new File("Data\\USA2012.txt");
 		Scanner in = new Scanner(f2);
 		get2012Colors(in);
 		int indx = 0;
 		
 		String[] states = {"AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 		for(int j = 0; j < states.length; j++) {
-			File count = new File("C:\\Users\\mcaten\\Downloads\\" + states[j] + ".txt");
+			File count = new File("Data\\" + states[j] + ".txt");
 			Scanner in2 = new Scanner(count);
 			getCountyPoints(in2);
 			
-			File f4 = new File("C:\\Users\\mcaten\\Downloads\\" + states[j] + "1992.txt");
+			File f4 = new File("Data\\" + states[j] + "1992.txt");
 			Scanner in3 = new Scanner(f4);
 			get2012Colors(in3);
 			int indx2 = 0;
