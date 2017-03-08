@@ -1,30 +1,80 @@
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
+import java.awt.GridLayout;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
-import java.io.*;
-import java.util.*;
-public class PurpleCounties3
-{
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class PurpleCounties3 {
+	
+    public static void main(String[] args) {
+        Frame3 test_frame = new Frame3();
+    }
+}
+
+class Frame3 extends JFrame {
+    private static final long serialVersionUID = 1L;
+
+    Painting4 painting = new Painting4();
+
+    public Frame3() {
+        JFrame gui = new JFrame();
+        gui.setTitle("Purple");
+        
+        gui.setSize(950, 450);
+        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        Container pane = gui.getContentPane();
+        pane.setLayout(new GridLayout(1, 1));
+
+        pane.add(painting);
+        gui.setVisible(true);
+    }
+}
+
+class Painting4 extends JPanel {
 	
 	private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
 	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
 	private static ArrayList<String> stateNames = new ArrayList<String>();
 	private static ArrayList<String> countyNames = new ArrayList<String>();
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
-	public static void main(String[] args) throws FileNotFoundException {
+	
+    private static final long serialVersionUID = 1L;
+ 
+    public Painting4() {
+        setBackground(Color.WHITE);
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        File f = new File("data\\USA.txt");
+		Scanner input;
+		try 
+		{
+			input = new Scanner(f);
+			getPoints(input);
+		} 
 		
-		File f = new File("data\\USA.txt");
-		Scanner input = new Scanner(f);
-		getPoints(input);
+		catch (FileNotFoundException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		DrawingPanel panel = new DrawingPanel(950, 450);
-		panel.setBackground(Color.WHITE);
-		Graphics g = panel.getGraphics();
 		Graphics2D g2d = (Graphics2D) g;
 		
 		AffineTransform transform = new AffineTransform();
@@ -35,19 +85,52 @@ public class PurpleCounties3
 		transform.translate(-50, 125);
 		
 		File f2 = new File("data\\USA2012.txt");
-		Scanner in = new Scanner(f2);
-		get2012Colors(in);
+		Scanner in;
+		try
+		{
+			in = new Scanner(f2);
+			get2012Colors(in);
+		} 
+		
+		catch (FileNotFoundException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		int indx = 0;
+		
 		
 		String[] states = {"AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 		for(int j = 0; j < states.length; j++) {
 			File count = new File("data\\" + states[j] + ".txt");
-			Scanner in2 = new Scanner(count);
-			getCountyPoints(in2);
+			Scanner in2;
+			try 
+			{
+				in2 = new Scanner(count);
+				getCountyPoints(in2);
+			} 
 			
-			File f4 = new File("data\\" + states[j] + "1992.txt");
-			Scanner in3 = new Scanner(f4);
-			get2012Colors(in3);
+			catch (FileNotFoundException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			File f4 = new File("data\\" + states[j] + "1968.txt");
+			Scanner in3;
+			try 
+			{
+				in3 = new Scanner(f4);
+				get2012Colors(in3);
+			} 
+			
+			catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			int indx2 = 0;
 		
 			for(Shape p2 : counties)
@@ -67,9 +150,9 @@ public class PurpleCounties3
 			g2d.draw(s);
 			indx++;
 		}
-	}
-	
-	public static void getPoints(Scanner input)
+    }
+    
+    public static void getPoints(Scanner input)
 	{
 		while(input.hasNextLine())
 		{
@@ -119,8 +202,8 @@ public class PurpleCounties3
 			states2.add(path);
 		}
 	}
-	
-	public static void getCountyPoints(Scanner input)
+    
+    public static void getCountyPoints(Scanner input)
 	{
 		while(input.hasNext())
 		{
@@ -178,7 +261,7 @@ public class PurpleCounties3
 		}
 	}
 	
-	public static void get2012Colors(Scanner input)
+    public static void get2012Colors(Scanner input)
 	{
 		input.nextLine();
 		int s = 0;
