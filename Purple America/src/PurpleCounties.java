@@ -17,7 +17,7 @@ public class PurpleCounties
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		File f = new File("Data\\USA.txt");
+		File f = new File("data\\USA.txt");
 		Scanner input = new Scanner(f);
 		getPoints(input);
 		
@@ -33,11 +33,11 @@ public class PurpleCounties
 		transform.rotate(Math.toRadians(270));
 		transform.translate(-50, 125);
 		
-		File count = new File("Data\\USA-county.txt");
+		File count = new File("data\\USA-county.txt");
 		Scanner in2 = new Scanner(count);
 		getCountyPoints(in2);
 		
-		File f2 = new File("Data\\USA2012.txt");
+		File f2 = new File("data\\USA2012.txt");
 		Scanner in = new Scanner(f2);
 		get2012Colors(in);
 		int indx = 0;
