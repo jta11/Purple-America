@@ -31,11 +31,11 @@ public class PurpleCounties3 {
 
 class Frame extends JFrame {
     private static final long serialVersionUID = 1L;
-
-    Painting painting = new Painting();
+    private static JFrame gui;
+    Painting painting = new Painting("1960");
 
     public Frame() {
-        JFrame gui = new JFrame();
+        gui = new JFrame();
         gui.setTitle("Purple");
         
         gui.setSize(950, 495);
@@ -48,19 +48,145 @@ class Frame extends JFrame {
         JMenu year = new JMenu("Year");
         
         JMenuItem y1 = new JMenuItem("1960");
+        y1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	   gui.remove(painting);
+                   painting = new Painting("1960");
+                   gui.add(painting);
+                   gui.validate();
+                   
+            }
+        });
+        
         JMenuItem y2 = new JMenuItem("1964");
+        y2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1964");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y3 = new JMenuItem("1968");
+        y3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1968");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y4 = new JMenuItem("1972");
+        y4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1972");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y5 = new JMenuItem("1976");
+        y5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1976");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y6 = new JMenuItem("1980");
+        y6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1980");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y7 = new JMenuItem("1984");
+        y7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1984");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y8 = new JMenuItem("1988");
+        y8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1988");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y9 = new JMenuItem("1992");
+        y9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1992");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y10 = new JMenuItem("1996");
+        y10.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1996");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y11 = new JMenuItem("2000");
+        y11.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2000");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y12 = new JMenuItem("2004");
+        y12.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2004");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y13 = new JMenuItem("2008");
+        y13.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2008");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
         JMenuItem y14 = new JMenuItem("2012");
+        y3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2012");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
         
         year.add(y1);
         year.add(y2);
@@ -95,12 +221,14 @@ class Painting extends JPanel {
 	private static ArrayList<String> stateNames = new ArrayList<String>();
 	private static ArrayList<String> countyNames = new ArrayList<String>();
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
+	private static String year;
 	
     private static final long serialVersionUID = 1L;
  
-    public Painting() 
+    public Painting(String year) 
     {
         setBackground(Color.WHITE);
+        this.year = year;
     }
 
     public void paintComponent(Graphics g) {
@@ -145,7 +273,7 @@ class Painting extends JPanel {
 			}
 			
 			
-			File f4 = new File("data\\" + states[j] + "1992.txt");
+			File f4 = new File("data\\" + states[j] + year + ".txt");
 			Scanner in3;
 			try 
 			{
