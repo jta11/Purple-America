@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.io.File;
@@ -14,6 +16,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import org.jbenchx.annotations.*;
@@ -21,42 +27,210 @@ import org.jbenchx.annotations.*;
 public class PurpleCounties3 {
 	
     public static void main(String[] args) {
-        Frame3 test_frame = new Frame3();
+        Frame test_frame = new Frame();
     }
 }
 
-class Frame3 extends JFrame {
+class Frame extends JFrame {
     private static final long serialVersionUID = 1L;
+    private static JFrame gui;
+    Painting painting = new Painting("1960");
 
-    Painting4 painting = new Painting4();
-
-    public Frame3() {
-        JFrame gui = new JFrame();
+    public Frame() {
+        gui = new JFrame();
         gui.setTitle("Purple");
         
-        gui.setSize(950, 450);
+        gui.setSize(950, 495);
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+        JMenuBar menubar = new JMenuBar();
+        gui.setJMenuBar(menubar);
+        
+        JMenu year = new JMenu("Year");
+        
+        JMenuItem y1 = new JMenuItem("1960");
+        y1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	   gui.remove(painting);
+                   painting = new Painting("1960");
+                   gui.add(painting);
+                   gui.validate();
+                   
+            }
+        });
+        
+        JMenuItem y2 = new JMenuItem("1964");
+        y2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1964");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y3 = new JMenuItem("1968");
+        y3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1968");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y4 = new JMenuItem("1972");
+        y4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1972");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y5 = new JMenuItem("1976");
+        y5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1976");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y6 = new JMenuItem("1980");
+        y6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1980");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y7 = new JMenuItem("1984");
+        y7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1984");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y8 = new JMenuItem("1988");
+        y8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1988");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y9 = new JMenuItem("1992");
+        y9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1992");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y10 = new JMenuItem("1996");
+        y10.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("1996");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y11 = new JMenuItem("2000");
+        y11.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2000");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y12 = new JMenuItem("2004");
+        y12.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2004");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y13 = new JMenuItem("2008");
+        y13.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2008");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        JMenuItem y14 = new JMenuItem("2012");
+        y3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+            	  gui.remove(painting);
+                  painting = new Painting("2012");
+                  gui.add(painting);
+                  gui.validate();
+            }
+        });
+        
+        year.add(y1);
+        year.add(y2);
+        year.add(y3);
+        year.add(y4);
+        year.add(y5);
+        year.add(y6);
+        year.add(y7);
+        year.add(y8);
+        year.add(y9);
+        year.add(y10);
+        year.add(y11);
+        year.add(y12);
+        year.add(y13);
+        year.add(y14);
+        
+        menubar.add(year);
+        
         Container pane = gui.getContentPane();
         pane.setLayout(new GridLayout(1, 1));
 
         pane.add(painting);
+        
         gui.setVisible(true);
     }
 }
 
-class Painting4 extends JPanel {
+class Painting extends JPanel {
 	
 	private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
 	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
 	private static ArrayList<String> stateNames = new ArrayList<String>();
 	private static ArrayList<String> countyNames = new ArrayList<String>();
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
+	private static String year;
 	
     private static final long serialVersionUID = 1L;
  
-    public Painting4() {
+    public Painting(String year) 
+    {
         setBackground(Color.WHITE);
+        this.year = year;
     }
 
     public void paintComponent(Graphics g) {
@@ -72,7 +246,6 @@ class Painting4 extends JPanel {
 		
 		catch (FileNotFoundException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -83,25 +256,9 @@ class Painting4 extends JPanel {
 		g2d.setTransform(transform);
 		transform.scale(13, 16);
 		transform.rotate(Math.toRadians(270));
-		transform.translate(-50, 125);
-		
-		File f2 = new File("data\\USA2012.txt");
-		Scanner in;
-		try
-		{
-			in = new Scanner(f2);
-			get2012Colors(in);
-		} 
-		
-		catch (FileNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		transform.translate(-53, 125);
 		
 		int indx = 0;
-		
-		
 		String[] states = {"AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 		for(int j = 0; j < states.length; j++) {
 			File count = new File("data\\" + states[j] + ".txt");
@@ -114,21 +271,20 @@ class Painting4 extends JPanel {
 			
 			catch (FileNotFoundException e) 
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			
-			File f4 = new File("data\\" + states[j] + "1968.txt");
+			File f4 = new File("data\\" + states[j] + year + ".txt");
 			Scanner in3;
 			try 
 			{
 				in3 = new Scanner(f4);
-				get2012Colors(in3);
+				getStateColors(in3);
 			} 
 			
-			catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
+			catch (FileNotFoundException e) 
+			{
 				e.printStackTrace();
 			}
 			
@@ -196,6 +352,7 @@ class Painting4 extends JPanel {
 					{
 						path.lineTo(num2,  num1);
 					}
+					
 					//System.out.println(num1 + " " + num2);
 				}
 			}
@@ -262,7 +419,7 @@ class Painting4 extends JPanel {
 		}
 	}
 	
-    public static void get2012Colors(Scanner input)
+    public static void getStateColors(Scanner input)
 	{
 		input.nextLine();
 		int s = 0;
