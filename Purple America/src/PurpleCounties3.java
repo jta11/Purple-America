@@ -14,8 +14,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.jbenchx.annotations.*;
 
 public class PurpleCounties3 {
 	
