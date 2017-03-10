@@ -16,7 +16,7 @@ public class PurpleAmerica
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		File f = new File("C:\\Users\\mcaten\\Downloads\\USA.txt");
+		File f = new File("Data\\USA.txt");
 		Scanner input = new Scanner(f);
 		getPoints(input);
 		
@@ -28,11 +28,11 @@ public class PurpleAmerica
 		AffineTransform transform = new AffineTransform();
 		g2d.setColor(Color.BLACK);
 		g2d.setTransform(transform);
-		transform.scale(16, 16);
+		transform.scale(13, 16);
 		transform.rotate(Math.toRadians(270));
 		transform.translate(-50, 125);
 		
-		File f2 = new File("C:\\Users\\mcaten\\Downloads\\USA2012.txt");
+		File f2 = new File("Data\\USA2012.txt");
 		Scanner in = new Scanner(f2);
 		get2012Colors(in);
 		int indx = 0;

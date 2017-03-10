@@ -22,8 +22,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import org.jbenchx.annotations.*;
-
 public class PurpleCounties3 {
 	
     public static void main(String[] args) {
