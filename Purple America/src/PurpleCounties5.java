@@ -44,16 +44,27 @@ class Frame extends JFrame {
 		gui = new JFrame();
 		gui.setTitle("Purple");
 
-		gui.setSize(950, 495);
+		gui.setSize(800, 495);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menubar = new JMenuBar();
 		gui.setJMenuBar(menubar);
 
 		JMenu counties = new JMenu("Counties");
-
-		JMenuItem c1 = new JMenuItem("Yes");
+		
+		JMenuItem c1 = new JMenuItem("No");
 		c1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				gui.remove(painting);
+				painting = new Painting(year1, false);
+				gui.add(painting);
+				gui.validate();
+				counties1 = false;
+			}
+		});
+
+		JMenuItem c2 = new JMenuItem("Yes");
+		c2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
 				painting = new Painting(year1, true);
@@ -63,16 +74,7 @@ class Frame extends JFrame {
 			}
 		});
 
-		JMenuItem c2 = new JMenuItem("No");
-		c2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ev) {
-				gui.remove(painting);
-				painting = new Painting(year1, false);
-				gui.add(painting);
-				gui.validate();
-				counties1 = false;
-			}
-		});
+		
 
 		counties.add(c1);
 		counties.add(c2);
@@ -303,7 +305,7 @@ class Painting extends JPanel {
 		g2d.setTransform(transform);
 		transform.scale(13, 16);
 		transform.rotate(Math.toRadians(270));
-		transform.translate(-53, 125);
+		transform.translate(-52, 126);
 
 		
 		String[] states = { "AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS",
