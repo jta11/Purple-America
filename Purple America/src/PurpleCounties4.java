@@ -29,16 +29,16 @@ import javax.swing.JPanel;
 public class PurpleCounties4 {
 
 	public static void main(String[] args) {
-		Frame test_frame = new Frame();
+		Frame4 test_frame = new Frame4();
 	}
 }
 
-class Frame extends JFrame {
+class Frame4 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static JFrame gui;
-	Painting painting = new Painting("1960");
+	Painting4 painting = new Painting4("1960");
 
-	public Frame() {
+	public Frame4() {
 		gui = new JFrame();
 		gui.setTitle("Purple");
 
@@ -54,7 +54,7 @@ class Frame extends JFrame {
 		y1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1960");
+				painting = new Painting4("1960");
 				gui.add(painting);
 				gui.validate();
 
@@ -65,7 +65,7 @@ class Frame extends JFrame {
 		y2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1964");
+				painting = new Painting4("1964");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -75,7 +75,7 @@ class Frame extends JFrame {
 		y3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1968");
+				painting = new Painting4("1968");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -85,7 +85,7 @@ class Frame extends JFrame {
 		y4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1972");
+				painting = new Painting4("1972");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -95,7 +95,7 @@ class Frame extends JFrame {
 		y5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1976");
+				painting = new Painting4("1976");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -105,7 +105,7 @@ class Frame extends JFrame {
 		y6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1980");
+				painting = new Painting4("1980");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -115,7 +115,7 @@ class Frame extends JFrame {
 		y7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1984");
+				painting = new Painting4("1984");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -125,7 +125,7 @@ class Frame extends JFrame {
 		y8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1988");
+				painting = new Painting4("1988");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -135,7 +135,7 @@ class Frame extends JFrame {
 		y9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1992");
+				painting = new Painting4("1992");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -145,7 +145,7 @@ class Frame extends JFrame {
 		y10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1996");
+				painting = new Painting4("1996");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -155,7 +155,7 @@ class Frame extends JFrame {
 		y11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2000");
+				painting = new Painting4("2000");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -165,7 +165,7 @@ class Frame extends JFrame {
 		y12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2004");
+				painting = new Painting4("2004");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -175,7 +175,7 @@ class Frame extends JFrame {
 		y13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2008");
+				painting = new Painting4("2008");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -185,7 +185,7 @@ class Frame extends JFrame {
 		y3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2012");
+				painting = new Painting4("2012");
 				gui.add(painting);
 				gui.validate();
 			}
@@ -217,7 +217,7 @@ class Frame extends JFrame {
 	}
 }
 
-class Painting extends JPanel {
+class Painting4 extends JPanel {
 
 	private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
 	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
@@ -228,7 +228,7 @@ class Painting extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public Painting(String year) {
+	public Painting4(String year) {
 		setBackground(Color.WHITE);
 		this.year = year;
 	}
