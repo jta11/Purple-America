@@ -285,7 +285,7 @@ class Painting extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		File f = new File("data\\USA.txt");
+		File f = new File("data/USA.txt");
 		BufferedReader input1 = null;
 		Scanner input = null;
 		try {
@@ -313,11 +313,11 @@ class Painting extends JPanel {
 				"KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
 				"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
 		for (int j = 0; j < states.length; j++) {
-			File count = new File("data\\" + states[j] + ".txt");
+			File count = new File("data/" + states[j] + ".txt");
 			Scanner in2 = null;
 			BufferedReader reader2 = null;
 			try {
-				// File file = new File("data\\" + states[j] + ".txt");
+				// File file = new File("data/" + states[j] + ".txt");
 
 				reader2 = new BufferedReader(new FileReader(count));
 				// getCountyPoints(reader2)
@@ -334,7 +334,7 @@ class Painting extends JPanel {
 			}
 			in2.close();
 
-			File f4 = new File("data\\" + states[j] + year + ".txt");
+			File f4 = new File("data/" + states[j] + year + ".txt");
 			BufferedReader reader4 = null;
 			Scanner in3 = null;
 			try {
@@ -361,7 +361,7 @@ class Painting extends JPanel {
 			}
 
 			if (counties1 == false) {
-				File f2 = new File("Data\\USA" + year + ".txt");
+				File f2 = new File("Data/USA" + year + ".txt");
 				Scanner in = null;
 				try {
 					in = new Scanner(f2);
