@@ -1,3 +1,4 @@
+package version1;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,15 +9,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.io.*;
 import java.util.*;
-
-import drawingPanelVersion.DrawingPanel;
-public class PurpleCounties2
+public class PurpleCounties
 {
 	
 	private static ArrayList<Path2D> states = new ArrayList<Path2D>();
 	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
 	private static ArrayList<String> stateNames = new ArrayList<String>();
-	private static ArrayList<String> countyNames = new ArrayList<String>();
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 	public static void main(String[] args) throws FileNotFoundException {
 		
@@ -36,7 +34,7 @@ public class PurpleCounties2
 		transform.rotate(Math.toRadians(270));
 		transform.translate(-50, 125);
 		
-		File count = new File("data\\AL.txt");
+		File count = new File("data\\USA-county.txt");
 		Scanner in2 = new Scanner(count);
 		getCountyPoints(in2);
 		
@@ -48,23 +46,19 @@ public class PurpleCounties2
 		for(Shape p : states)
 		{
 			Shape s = transform.createTransformedShape(p);
+			g2d.setColor(stateMap.get(stateNames.get(indx)));
+			g2d.fill(s);
 			g2d.setColor(Color.BLACK);
 			g2d.setStroke(new BasicStroke(0.01f));
 			g2d.draw(s);
 			indx++;
 		}
 		
-		File f4 = new File("data\\AL2012.txt");
-		Scanner in3 = new Scanner(f4);
-		get2012Colors(in3);
-		int indx2 = 0;
-		
 		for(Shape p2 : counties)
 		{
 			Shape s = transform.createTransformedShape(p2);
-			g2d.setColor(stateMap.get(countyNames.get(indx2)));
-			g2d.fill(s);
-			indx2++;
+			g2d.setColor(Color.BLACK);
+			g2d.draw(s);
 		}
 	}
 	
@@ -126,8 +120,7 @@ public class PurpleCounties2
 			String county = input.next();
 			String state = input.next();
 			String numPoints = input.next();
-			boolean exception = !Character.isDigit(numPoints.charAt(0)) || numPoints.contains(".");
-			countyNames.add(county);
+			boolean exception = !Character.isDigit(numPoints.charAt(0));
 			
 			while(exception)
 			{

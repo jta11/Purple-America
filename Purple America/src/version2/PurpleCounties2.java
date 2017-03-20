@@ -1,4 +1,4 @@
-package drawingPanelVersion;
+package version2;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,15 +9,19 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.io.*;
 import java.util.*;
-public class PurpleAmerica
+
+import version1.DrawingPanel;
+public class PurpleCounties2
 {
 	
 	private static ArrayList<Path2D> states = new ArrayList<Path2D>();
+	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
 	private static ArrayList<String> stateNames = new ArrayList<String>();
+	private static ArrayList<String> countyNames = new ArrayList<String>();
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		File f = new File("Data\\USA.txt");
+		File f = new File("data\\USA.txt");
 		Scanner input = new Scanner(f);
 		getPoints(input);
 		
@@ -29,11 +33,15 @@ public class PurpleAmerica
 		AffineTransform transform = new AffineTransform();
 		g2d.setColor(Color.BLACK);
 		g2d.setTransform(transform);
-		transform.scale(13, 16);
+		transform.scale(15, 16);
 		transform.rotate(Math.toRadians(270));
 		transform.translate(-50, 125);
 		
-		File f2 = new File("Data\\USA2012.txt");
+		File count = new File("data\\AL.txt");
+		Scanner in2 = new Scanner(count);
+		getCountyPoints(in2);
+		
+		File f2 = new File("data\\USA2012.txt");
 		Scanner in = new Scanner(f2);
 		get2012Colors(in);
 		int indx = 0;
@@ -41,12 +49,23 @@ public class PurpleAmerica
 		for(Shape p : states)
 		{
 			Shape s = transform.createTransformedShape(p);
-			g2d.setColor(stateMap.get(stateNames.get(indx)));
-			g2d.fill(s);
-			g2d.setColor(Color.WHITE);
+			g2d.setColor(Color.BLACK);
 			g2d.setStroke(new BasicStroke(0.01f));
 			g2d.draw(s);
 			indx++;
+		}
+		
+		File f4 = new File("data\\AL2012.txt");
+		Scanner in3 = new Scanner(f4);
+		get2012Colors(in3);
+		int indx2 = 0;
+		
+		for(Shape p2 : counties)
+		{
+			Shape s = transform.createTransformedShape(p2);
+			g2d.setColor(stateMap.get(countyNames.get(indx2)));
+			g2d.fill(s);
+			indx2++;
 		}
 	}
 	
@@ -98,6 +117,64 @@ public class PurpleAmerica
 			}
 			
 			states.add(path);
+		}
+	}
+	
+	public static void getCountyPoints(Scanner input)
+	{
+		while(input.hasNext())
+		{
+			String county = input.next();
+			String state = input.next();
+			String numPoints = input.next();
+			boolean exception = !Character.isDigit(numPoints.charAt(0)) || numPoints.contains(".");
+			countyNames.add(county);
+			
+			while(exception)
+			{
+				try
+				{
+					Integer.parseInt(numPoints);
+					exception = false;
+				}
+				
+				catch(Exception e)
+				{
+					county += state;
+					state = numPoints;
+					numPoints = input.next();
+				}
+			}
+			
+			
+			//System.out.println(county + state + numPoints);
+			
+			Path2D path = new Path2D.Double();
+			
+			for(int count = 0; count < Integer.parseInt(numPoints); count++)
+			{
+				if(input.hasNext())
+				{
+					String next1 = input.next();
+					String next2 = input.next();
+					
+					double num1 = Double.parseDouble(next1);
+					double num2 = Double.parseDouble(next2);
+					
+					if(count == 0)
+					{
+						path.moveTo(num2,  num1);
+					}
+					
+					else
+					{
+						path.lineTo(num2,  num1);
+					}
+					//System.out.println(num1 + " " + num2);
+				}
+			}
+			
+			counties.add(path);
 		}
 	}
 	

@@ -1,3 +1,4 @@
+package version6;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Container;
@@ -26,27 +27,60 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class PurpleCounties4 {
+public class PurpleCounties6 {
 
 	public static void main(String[] args) {
-		Frame4 test_frame = new Frame4();
+		Frame5 test_frame = new Frame5();
 	}
 }
 
-class Frame4 extends JFrame {
+class Frame5 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static JFrame gui;
-	Painting4 painting = new Painting4("1960");
+	private static String year1 = "1960";
+	public static boolean counties1;
+	Painting5 painting = new Painting5(year1, counties1);
 
-	public Frame4() {
+	public Frame5() {
 		gui = new JFrame();
 		gui.setTitle("Purple");
 
-		gui.setSize(950, 495);
+		gui.setSize(800, 495);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menubar = new JMenuBar();
 		gui.setJMenuBar(menubar);
+
+		JMenu counties = new JMenu("Counties");
+		
+		JMenuItem c1 = new JMenuItem("No");
+		c1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				gui.remove(painting);
+				painting = new Painting5(year1, false);
+				gui.add(painting);
+				gui.validate();
+				counties1 = false;
+			}
+		});
+
+		JMenuItem c2 = new JMenuItem("Yes");
+		c2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				gui.remove(painting);
+				painting = new Painting5(year1, true);
+				gui.add(painting);
+				gui.validate();
+				counties1 = true;
+			}
+		});
+
+		
+
+		counties.add(c1);
+		counties.add(c2);
+
+		menubar.add(counties);
 
 		JMenu year = new JMenu("Year");
 
@@ -54,10 +88,10 @@ class Frame4 extends JFrame {
 		y1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1960");
+				painting = new Painting5("1960", counties1);
 				gui.add(painting);
 				gui.validate();
-
+				year1 = "1960";
 			}
 		});
 
@@ -65,9 +99,10 @@ class Frame4 extends JFrame {
 		y2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1964");
+				painting = new Painting5("1964", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1964";
 			}
 		});
 
@@ -75,9 +110,10 @@ class Frame4 extends JFrame {
 		y3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1968");
+				painting = new Painting5("1968", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1968";
 			}
 		});
 
@@ -85,9 +121,10 @@ class Frame4 extends JFrame {
 		y4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1972");
+				painting = new Painting5("1972", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1972";
 			}
 		});
 
@@ -95,9 +132,10 @@ class Frame4 extends JFrame {
 		y5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1976");
+				painting = new Painting5("1976", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1976";
 			}
 		});
 
@@ -105,9 +143,10 @@ class Frame4 extends JFrame {
 		y6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1980");
+				painting = new Painting5("1980", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1980";
 			}
 		});
 
@@ -115,9 +154,10 @@ class Frame4 extends JFrame {
 		y7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1984");
+				painting = new Painting5("1984", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1984";
 			}
 		});
 
@@ -125,9 +165,10 @@ class Frame4 extends JFrame {
 		y8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1988");
+				painting = new Painting5("1988", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1988";
 			}
 		});
 
@@ -135,9 +176,10 @@ class Frame4 extends JFrame {
 		y9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1992");
+				painting = new Painting5("1992", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1992";
 			}
 		});
 
@@ -145,9 +187,10 @@ class Frame4 extends JFrame {
 		y10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("1996");
+				painting = new Painting5("1996", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "1996";
 			}
 		});
 
@@ -155,9 +198,10 @@ class Frame4 extends JFrame {
 		y11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("2000");
+				painting = new Painting5("2000", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "2000";
 			}
 		});
 
@@ -165,9 +209,10 @@ class Frame4 extends JFrame {
 		y12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("2004");
+				painting = new Painting5("2004", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "2004";
 			}
 		});
 
@@ -175,19 +220,21 @@ class Frame4 extends JFrame {
 		y13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("2008");
+				painting = new Painting5("2008", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "2008";
 			}
 		});
 
 		JMenuItem y14 = new JMenuItem("2012");
-		y3.addActionListener(new ActionListener() {
+		y14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting4("2012");
+				painting = new Painting5("2012", counties1);
 				gui.add(painting);
 				gui.validate();
+				year1 = "2012";
 			}
 		});
 
@@ -217,7 +264,7 @@ class Frame4 extends JFrame {
 	}
 }
 
-class Painting4 extends JPanel {
+class Painting5 extends JPanel {
 
 	private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
 	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
@@ -225,28 +272,37 @@ class Painting4 extends JPanel {
 	private static ArrayList<String> countyNames = new ArrayList<String>();
 	private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 	private static String year;
+	private static boolean counties1;
 
 	private static final long serialVersionUID = 1L;
 
-	public Painting4(String year) {
+	public Painting5(String year, boolean counties) {
 		setBackground(Color.WHITE);
 		this.year = year;
+		this.counties1 = counties;
+		System.out.println("Counties: " + counties + "\nYear: " + year);
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		File f = new File("data\\USA.txt");
+		File f = new File("data/USA.txt");
 		BufferedReader input1 = null;
-		Scanner input;
+		Scanner input = null;
 		try {
 			input1 = new BufferedReader(new FileReader(f));
-			input = new Scanner(f);
+			input = new Scanner(input1);
 			getPoints(input);
 		}
 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
+		input.close();
+		try {
+			input1.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
@@ -256,21 +312,20 @@ class Painting4 extends JPanel {
 		g2d.setTransform(transform);
 		transform.scale(13, 16);
 		transform.rotate(Math.toRadians(270));
-		transform.translate(-53, 125);
+		transform.translate(-52, 126);
 
-		int indx = 0;
+		
 		String[] states = { "AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS",
 				"KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
 				"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
 		for (int j = 0; j < states.length; j++) {
-			String doc2 = "";
-			File count = new File("data\\" + states[j] + ".txt");
-			Scanner in2;
+			if (counties1 == true) {
+			File count = new File("data/" + states[j] + ".txt");
+			Scanner in2 = null;
 			BufferedReader reader2 = null;
 			try {
-				// File file = new File("data\\" + states[j] + ".txt");
-				String line2 = null;
-				
+				// File file = new File("data/" + states[j] + ".txt");
+
 				reader2 = new BufferedReader(new FileReader(count));
 				// getCountyPoints(reader2)
 				in2 = new Scanner(reader2);
@@ -284,10 +339,17 @@ class Painting4 extends JPanel {
 					e.printStackTrace();
 				}
 			}
+			in2.close();
+			try {
+				reader2.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			}
 
-			File f4 = new File("data\\" + states[j] + year + ".txt");
+			File f4 = new File("data/" + states[j] + year + ".txt");
 			BufferedReader reader4 = null;
-			Scanner in3;
+			Scanner in3 = null;
 			try {
 				reader4 = new BufferedReader(new FileReader(f4));
 
@@ -298,19 +360,53 @@ class Painting4 extends JPanel {
 			catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			in3.close();
+			try {
+				reader4.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		
+			if (counties1 == true) {
+				int indx2 = 0;
 
-			int indx2 = 0;
+				for (Shape p2 : counties) {
+					Shape s = transform.createTransformedShape(p2);
+					g2d.setColor(stateMap.get(countyNames.get(indx2)));
+					g2d.fill(s);
+					indx2++;
+				}
+			}
 
-			for (Shape p2 : counties) {
-				Shape s = transform.createTransformedShape(p2);
-				g2d.setColor(stateMap.get(countyNames.get(indx2)));
-				g2d.fill(s);
-				indx2++;
+			if (counties1 == false) {
+				File f2 = new File("data/USA" + year + ".txt");
+
+				Scanner in = null;
+				try {
+					in = new Scanner(f2);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				getStateColors(in);
+				int indx3 = 0;
+
+				for (Shape p : states2) {
+					Shape s = transform.createTransformedShape(p);
+					g2d.setColor(stateMap.get(stateNames.get(indx3)));
+					g2d.fill(s);
+					g2d.setColor(Color.WHITE);
+					g2d.setStroke(new BasicStroke(0.01f));
+					g2d.draw(s);
+					indx3++;
+				}
+				in.close();
 			}
 		}
-
+		
+		int indx = 0;
 		for (Shape p : states2) {
 			Shape s = transform.createTransformedShape(p);
+
 			g2d.setColor(Color.WHITE);
 			g2d.setStroke(new BasicStroke(0.01f));
 			g2d.draw(s);
