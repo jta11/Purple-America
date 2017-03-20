@@ -287,7 +287,7 @@ class Painting extends JPanel {
 
 		File f = new File("data\\USA.txt");
 		BufferedReader input1 = null;
-		Scanner input;
+		Scanner input = null;
 		try {
 			input1 = new BufferedReader(new FileReader(f));
 			input = new Scanner(input1);
@@ -297,6 +297,7 @@ class Painting extends JPanel {
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		input.close();
 
 		Graphics2D g2d = (Graphics2D) g;
 
@@ -313,7 +314,7 @@ class Painting extends JPanel {
 				"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
 		for (int j = 0; j < states.length; j++) {
 			File count = new File("data\\" + states[j] + ".txt");
-			Scanner in2;
+			Scanner in2 = null;
 			BufferedReader reader2 = null;
 			try {
 				// File file = new File("data\\" + states[j] + ".txt");
@@ -331,10 +332,11 @@ class Painting extends JPanel {
 					e.printStackTrace();
 				}
 			}
+			in2.close();
 
 			File f4 = new File("data\\" + states[j] + year + ".txt");
 			BufferedReader reader4 = null;
-			Scanner in3;
+			Scanner in3 = null;
 			try {
 				reader4 = new BufferedReader(new FileReader(f4));
 
@@ -345,6 +347,7 @@ class Painting extends JPanel {
 			catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			in3.close();
 
 			if (counties1 == true) {
 				int indx2 = 0;
@@ -377,6 +380,7 @@ class Painting extends JPanel {
 					g2d.draw(s);
 					indx3++;
 				}
+				in.close();
 			}
 		}
 		
