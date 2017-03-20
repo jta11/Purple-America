@@ -1,3 +1,4 @@
+package drawingPanelVersion;
 /**
 The DrawingPanel class provides a simple interface for drawing persistent
 images using a Graphics object.  An internal BufferedImage object is used
