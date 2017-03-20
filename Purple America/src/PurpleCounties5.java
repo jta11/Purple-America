@@ -298,6 +298,11 @@ class Painting5 extends JPanel {
 			e.printStackTrace();
 		}
 		input.close();
+		try {
+			input1.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		Graphics2D g2d = (Graphics2D) g;
 
@@ -333,6 +338,11 @@ class Painting5 extends JPanel {
 				}
 			}
 			in2.close();
+			try {
+				reader2.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 
 			File f4 = new File("data/" + states[j] + year + ".txt");
 			BufferedReader reader4 = null;
@@ -348,6 +358,11 @@ class Painting5 extends JPanel {
 				e.printStackTrace();
 			}
 			in3.close();
+			try {
+				reader4.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 
 			if (counties1 == true) {
 				int indx2 = 0;
