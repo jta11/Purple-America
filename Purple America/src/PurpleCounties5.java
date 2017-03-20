@@ -361,7 +361,8 @@ class Painting extends JPanel {
 			}
 
 			if (counties1 == false) {
-				File f2 = new File("Data/USA" + year + ".txt");
+				File f2 = new File("data/USA" + year + ".txt");
+
 				Scanner in = null;
 				try {
 					in = new Scanner(f2);
