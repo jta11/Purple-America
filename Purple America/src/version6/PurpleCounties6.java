@@ -359,4 +359,3 @@ class Painting6 extends JPanel {
 		}
 	}
 }
-
