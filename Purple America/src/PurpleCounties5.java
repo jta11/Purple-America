@@ -29,18 +29,18 @@ import javax.swing.JPanel;
 public class PurpleCounties5 {
 
 	public static void main(String[] args) {
-		Frame test_frame = new Frame();
+		Frame5 test_frame = new Frame5();
 	}
 }
 
-class Frame extends JFrame {
+class Frame5 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static JFrame gui;
 	private static String year1 = "1960";
 	public static boolean counties1;
-	Painting painting = new Painting(year1, counties1);
+	Painting5 painting = new Painting5(year1, counties1);
 
-	public Frame() {
+	public Frame5() {
 		gui = new JFrame();
 		gui.setTitle("Purple");
 
@@ -56,7 +56,7 @@ class Frame extends JFrame {
 		c1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting(year1, false);
+				painting = new Painting5(year1, false);
 				gui.add(painting);
 				gui.validate();
 				counties1 = false;
@@ -67,7 +67,7 @@ class Frame extends JFrame {
 		c2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting(year1, true);
+				painting = new Painting5(year1, true);
 				gui.add(painting);
 				gui.validate();
 				counties1 = true;
@@ -87,7 +87,7 @@ class Frame extends JFrame {
 		y1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1960", counties1);
+				painting = new Painting5("1960", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1960";
@@ -98,7 +98,7 @@ class Frame extends JFrame {
 		y2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1964", counties1);
+				painting = new Painting5("1964", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1964";
@@ -109,7 +109,7 @@ class Frame extends JFrame {
 		y3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1968", counties1);
+				painting = new Painting5("1968", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1968";
@@ -120,7 +120,7 @@ class Frame extends JFrame {
 		y4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1972", counties1);
+				painting = new Painting5("1972", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1972";
@@ -131,7 +131,7 @@ class Frame extends JFrame {
 		y5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1976", counties1);
+				painting = new Painting5("1976", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1976";
@@ -142,7 +142,7 @@ class Frame extends JFrame {
 		y6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1980", counties1);
+				painting = new Painting5("1980", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1980";
@@ -153,7 +153,7 @@ class Frame extends JFrame {
 		y7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1984", counties1);
+				painting = new Painting5("1984", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1984";
@@ -164,7 +164,7 @@ class Frame extends JFrame {
 		y8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1988", counties1);
+				painting = new Painting5("1988", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1988";
@@ -175,7 +175,7 @@ class Frame extends JFrame {
 		y9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1992", counties1);
+				painting = new Painting5("1992", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1992";
@@ -186,7 +186,7 @@ class Frame extends JFrame {
 		y10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("1996", counties1);
+				painting = new Painting5("1996", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "1996";
@@ -197,7 +197,7 @@ class Frame extends JFrame {
 		y11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2000", counties1);
+				painting = new Painting5("2000", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "2000";
@@ -208,7 +208,7 @@ class Frame extends JFrame {
 		y12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2004", counties1);
+				painting = new Painting5("2004", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "2004";
@@ -219,7 +219,7 @@ class Frame extends JFrame {
 		y13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2008", counties1);
+				painting = new Painting5("2008", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "2008";
@@ -230,7 +230,7 @@ class Frame extends JFrame {
 		y14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				gui.remove(painting);
-				painting = new Painting("2012", counties1);
+				painting = new Painting5("2012", counties1);
 				gui.add(painting);
 				gui.validate();
 				year1 = "2012";
@@ -263,7 +263,7 @@ class Frame extends JFrame {
 	}
 }
 
-class Painting extends JPanel {
+class Painting5 extends JPanel {
 
 	private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
 	private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
@@ -275,7 +275,7 @@ class Painting extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public Painting(String year, boolean counties) {
+	public Painting5(String year, boolean counties) {
 		setBackground(Color.WHITE);
 		this.year = year;
 		this.counties1 = counties;
