@@ -292,16 +292,6 @@ class Painting6 extends JPanel {
 		transform.rotate(Math.toRadians(270));
 		transform.translate(-52, 126);
 		
-		File f = new File("data/USA.txt");
-		Scanner input;
-		try {
-			input = new Scanner(f);
-			getPoints(input);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		for(State s : states3)
 		{
 			ArrayList<Path2D> path = s.getStatePath();
