@@ -10,8 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -279,10 +282,29 @@ class Painting6 extends JPanel {
 		this.year = year;
 		this.counties1 = counties;
 		
+		File f = new File("data/USA.txt");
+		BufferedReader input1 = null;
+		Scanner input = null;
+		try {
+			input1 = new BufferedReader(new FileReader(f));
+			input = new Scanner(input1);
+			getPoints(input);
+		}
+
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		input.close();
+		try {
+			input1.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
 		
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 
 		AffineTransform transform = new AffineTransform();
