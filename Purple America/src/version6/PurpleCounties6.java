@@ -1,10 +1,12 @@
 package version6;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.List;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +22,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -37,6 +40,10 @@ class Frame6 extends JFrame {
 	private static JFrame gui;
 	private static String year1 = "1960";
 	public static boolean counties1;
+	public static String[] states = { "AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS",
+			"KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
+			"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
+			
 	Painting6 painting = new Painting6(year1, counties1);
 
 	public Frame6() {
@@ -50,7 +57,7 @@ class Frame6 extends JFrame {
 		gui.setJMenuBar(menubar);
 
 		JMenu counties = new JMenu("Counties");
-		
+
 		JMenuItem c1 = new JMenuItem("No");
 		c1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
@@ -257,14 +264,12 @@ class Frame6 extends JFrame {
 		pane.add(painting);
 		gui.setVisible(true);
 		init();
-		
 	}
-	
-	public void init()
-	{
+
+	public void init() {
 		Graphics g = gui.getGraphics();
 		gui.setBackground(Color.WHITE);
-		
+
 		File f = new File("data/USA.txt");
 		BufferedReader input1 = null;
 		Scanner input = null;
@@ -283,7 +288,7 @@ class Frame6 extends JFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		Graphics2D g2d = (Graphics2D) g;
 
 		AffineTransform transform = new AffineTransform();
@@ -291,180 +296,168 @@ class Frame6 extends JFrame {
 		g2d.setTransform(transform);
 		transform.scale(13, 16);
 		transform.rotate(Math.toRadians(270));
-		transform.translate(-52, 126);
-		
-		for(State s : Painting6.states3)
-		{
+		transform.translate(-54, 126);
+
+		for (State s : Painting6.states3) {
 			ArrayList<Path2D> path = s.getStatePath();
-			
-			for(Path2D p : path)
-			{
+
+			for (Path2D p : path) {
 				Shape shape = transform.createTransformedShape(p);
 				g2d.draw(shape);
+
+			}
+		}
+		
+		System.out.println(Painting6.states3.size());
+	}
+
+	static class Painting6 extends JPanel {
+
+		private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
+		private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
+		private static ArrayList<String> stateNames = new ArrayList<String>();
+		private static ArrayList<String> countyNames = new ArrayList<String>();
+		private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
+		private static String year;
+		private static boolean counties1;
+
+		static ArrayList<State> states3 = new ArrayList<State>();
+
+		private static final long serialVersionUID = 1L;
+
+		public Painting6(String year, boolean counties) {
+			setBackground(Color.WHITE);
+			this.year = year;
+			this.counties1 = counties;
+		}
+
+		public void paintComponent(Graphics g) {
+
+			super.paintComponent(g);
+			
+			for(int j = 0; j < Frame6.states.length; j++)
+			{
 				
 			}
 		}
-		
-		String[] states = { "AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS",
-				"KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
-				"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
-		for (int j = 0; j < states.length; j++) {
-			File count = new File("data/" + states[j] + ".txt");
-			Scanner in2 = null;
-			BufferedReader reader2 = null;
-			try {
-				// File file = new File("data/" + states[j] + ".txt");
 
-				reader2 = new BufferedReader(new FileReader(count));
-				// getCountyPoints(reader2)
-				in2 = new Scanner(reader2);
-				Painting6.getCountyPoints(in2);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					reader2.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+		public static void getPoints(Scanner input) {
+			while (input.hasNextLine()) {
+				String state = input.nextLine();
+				String country = input.nextLine();
+				String numPoints = input.nextLine();
+
+				State s = new State(state);
+
+				// System.out.println(state + " " + country + " " + numPoints);
+
+				Path2D path = new Path2D.Double();
+
+				for (int count = 0; count <= Integer.parseInt(numPoints); count++) {
+					if (input.hasNextLine()) {
+						String line = input.nextLine();
+
+						if (line.trim().isEmpty()) {
+							break;
+						}
+
+						// System.out.println(line);
+
+						if (Character.isWhitespace(line.charAt(0))) {
+							line = line.substring(1);
+						}
+
+						double num1 = Double.parseDouble(line.substring(0, line.indexOf(" ")));
+						double num2 = Double.parseDouble(line.substring(line.lastIndexOf(" ") + 1));
+
+						if (count == 0) {
+							path.moveTo(num2, num1);
+						}
+
+						else {
+							path.lineTo(num2, num1);
+						}
+					}
 				}
-			}
-			in2.close();
-			try {
-				reader2.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
+
+				s.addStatePath(path);
+				states3.add(s);
 			}
 		}
 		
-		int indx2 = 0;
+		public static void getCountyPoints(Scanner input) {
+			while (input.hasNext()) {
+				String county = input.next();
+				String state = input.next();
+				String numPoints = input.next();
+				boolean exception = !Character.isDigit(numPoints.charAt(0)) || numPoints.contains(".");
 
-		for (Shape p2 : Painting6.counties) {
-			Shape s = transform.createTransformedShape(p2);
-			g2d.setColor(Painting6.stateMap.get(Painting6.countyNames.get(indx2)));
-			g2d.draw(s);
-			indx2++;
+				while (exception) {
+					try {
+						Integer.parseInt(numPoints);
+						exception = false;
+					}
+
+					catch (Exception e) {
+						county += state;
+						state = numPoints;
+						numPoints = input.next();
+					}
+				}
+
+				// System.out.println(county + state + numPoints);
+
+				Path2D path = new Path2D.Double();
+
+				for (int count = 0; count < Integer.parseInt(numPoints); count++) {
+					if (input.hasNext()) {
+						String next1 = input.next();
+						String next2 = input.next();
+
+						double num1 = Double.parseDouble(next1);
+						double num2 = Double.parseDouble(next2);
+
+						if (count == 0) {
+							path.moveTo(num2, num1);
+						}
+
+						else {
+							path.lineTo(num2, num1);
+						}
+						// System.out.println(num1 + " " + num2);
+					}
+				}
+
+				County c = new County(county, path);
+				//counties3.add(c);
+			}
 		}
-}
-
-static class Painting6 extends JPanel {
-
-	public static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
-	public static ArrayList<Path2D> counties = new ArrayList<Path2D>();
-	public static ArrayList<String> stateNames = new ArrayList<String>();
-	public static ArrayList<String> countyNames = new ArrayList<String>();
-	public static HashMap<String, Color> stateMap = new HashMap<String, Color>();
-	
-	static ArrayList<State> states3 = new ArrayList<State>();
-	
-	
-	private static String year;
-	private static boolean counties1;
-
-	private static final long serialVersionUID = 1L;
-	
-	public Painting6(String year, boolean counties)
-	{
-		//setBackground(Color.WHITE);
-		this.year = year;
-		this.counties1 = counties;
-	}
-	
-	public void paintComponent(Graphics g) {
 		
-		super.paintComponent(g);
-	}
-	
-	public static void getPoints(Scanner input) {
-		while (input.hasNextLine()) {
-			String state = input.nextLine();
-			String country = input.nextLine();
-			String numPoints = input.nextLine();
+		public static void getStateColors(Scanner input) {
+			input.nextLine();
+			int s = 0;
+			while (input.hasNext()) {
+				String line = input.nextLine();
+				String state = line.substring(0, line.indexOf(","));
+				line = line.substring(line.indexOf(",") + 1);
 
-			State s = new State(state);
-			
-			// System.out.println(state + " " + country + " " + numPoints);
+				String r = line.substring(0, line.indexOf(","));
+				line = line.substring(line.indexOf(",") + 1);
 
-			Path2D path = new Path2D.Double();
+				String ob = line.substring(0, line.indexOf(","));
+				line = line.substring(line.indexOf(",") + 1);
 
-			for (int count = 0; count <= Integer.parseInt(numPoints); count++) {
-				if (input.hasNextLine()) {
-					String line = input.nextLine();
+				String ot = line.substring(0, line.indexOf(","));
 
-					if (line.trim().isEmpty()) {
-						break;
-					}
+				int rom = Integer.parseInt(r);
+				int oba = Integer.parseInt(ob);
+				int oth = Integer.parseInt(ot);
+				int total = rom + oba + oth;
 
-					// System.out.println(line);
-
-					if (Character.isWhitespace(line.charAt(0))) {
-						line = line.substring(1);
-					}
-
-					double num1 = Double.parseDouble(line.substring(0, line.indexOf(" ")));
-					double num2 = Double.parseDouble(line.substring(line.lastIndexOf(" ") + 1));
-
-					if (count == 0) {
-						path.moveTo(num2, num1);
-					}
-
-					else {
-						path.lineTo(num2, num1);
-					}
-				}
+				Color c = new Color((rom * 255 / total), (oth * 255 / total), (oba * 255 / total));
+				stateMap.put(state, c);
+				s++;
 			}
-
-			s.addStatePath(path);
-			states3.add(s);
 		}
-	}
-	
-	public static void getCountyPoints(Scanner input) {
-		while (input.hasNext()) {
-			String county = input.next();
-			String state = input.next();
-			String numPoints = input.next();
-			boolean exception = !Character.isDigit(numPoints.charAt(0)) || numPoints.contains(".");
-			countyNames.add(county);
-
-			while (exception) {
-				try {
-					Integer.parseInt(numPoints);
-					exception = false;
-				}
-
-				catch (Exception e) {
-					county += state;
-					state = numPoints;
-					numPoints = input.next();
-				}
-			}
-
-			// System.out.println(county + state + numPoints);
-
-			Path2D path = new Path2D.Double();
-
-			for (int count = 0; count < Integer.parseInt(numPoints); count++) {
-				if (input.hasNext()) {
-					String next1 = input.next();
-					String next2 = input.next();
-
-					double num1 = Double.parseDouble(next1);
-					double num2 = Double.parseDouble(next2);
-
-					if (count == 0) {
-						path.moveTo(num2, num1);
-					}
-
-					else {
-						path.lineTo(num2, num1);
-					}
-					// System.out.println(num1 + " " + num2);
-				}
-			}
-
-			counties.add(path);
-		}
-	}
 	}
 }
-
