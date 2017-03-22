@@ -19,6 +19,11 @@ public class County
 		this.color = color;
 	}
 	
+	public String getName()
+	{
+		return this.name;
+	}
+	
 	public Path2D getPath()
 	{
 		return this.path;

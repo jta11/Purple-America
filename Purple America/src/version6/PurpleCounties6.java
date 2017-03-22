@@ -302,9 +302,9 @@ class Frame6 extends JFrame {
 		}
 		
 		//Read each county file
-		for(int j = 0; j < states.length; j++)
+		for(int j = 0; j < 1/*states.length*/; j++)
 		{
-			File counties = new File("data/" + states[j] + ".txt");
+			File counties = new File("data/DE" + ".txt");
 			Scanner in2 = null;
 			BufferedReader reader2 = null;
 				
@@ -337,11 +337,10 @@ class Frame6 extends JFrame {
 		Painting6.years.put(2008, (ArrayList<State>) Painting6.states3.clone());
 		Painting6.years.put(2012, (ArrayList<State>) Painting6.states3.clone());
 			
-			
-		for(int i = 0; i < Painting6.states3.size(); i++)
+		for(int i = 0; i < 1/*Painting6.states3.size()*/; i++)
 		{
-			File f4 = new File("data/" + states[i] + "1960.txt");
-			ArrayList<Color> countyColors = new ArrayList<Color>();
+			File f4 = new File("data/DE" + "1960.txt");
+			HashMap<String, Color> countyColors = new HashMap<String, Color>();
 				
 			BufferedReader reader3 = null;
 			Scanner in3 = null;
@@ -362,14 +361,11 @@ class Frame6 extends JFrame {
 				e1.printStackTrace();
 			}
 			
-			System.out.println(countyColors.size() + " " + Painting6.states3.get(i).getStateCounties().size());
+			System.out.println(Painting6.states3.get(i).getName() + " " + countyColors.size() + " " + Painting6.states3.get(i).getStateCounties().size());
 			
-			for(int count = 0; count < countyColors.size(); count++)
+			for(int count = 0; count < Painting6.states3.get(i).getStateCounties().size(); count++)
 			{
-				if(count < Painting6.states3.get(i).getStateCounties().size())
-				{
-					Painting6.states3.get(i).getStateCounties().get(count).setColor(countyColors.get(count));
-				}
+				Painting6.states3.get(i).getStateCounties().get(count).setColor(countyColors.get(Painting6.states3.get(i).getStateCounties().get(count).getName()));
 			}
 		}
 	}
@@ -431,7 +427,7 @@ class Frame6 extends JFrame {
 					
 				}
 				
-				g2d.setColor(Color.WHITE);
+				g2d.setColor(Color.BLACK);
 				
 				for (Path2D p : path) {
 					Shape shape = transform.createTransformedShape(p);
@@ -489,6 +485,7 @@ class Frame6 extends JFrame {
 				String county = input.next();
 				String state = input.next();
 				String numPoints = input.next();
+				
 				boolean exception = !Character.isDigit(numPoints.charAt(0)) || numPoints.contains(".");
 				
 				while (exception) {
@@ -498,12 +495,12 @@ class Frame6 extends JFrame {
 					}
 
 					catch (Exception e) {
-						county += state;
+						county += " " + state;
 						state = numPoints;
 						numPoints = input.next();
 					}
 				}
-
+				System.out.println(county);
 				// System.out.println(county + state + numPoints);
 
 				Path2D path = new Path2D.Double();
@@ -532,9 +529,9 @@ class Frame6 extends JFrame {
 			}
 		}
 		
-		public static ArrayList<Color> getStateColors(Scanner input) {
+		public static HashMap<String, Color> getStateColors(Scanner input) {
 			input.nextLine();
-			ArrayList<Color> colors = new ArrayList<Color>();
+			HashMap<String, Color> colors = new HashMap<String, Color>();
 			while (input.hasNext()) {
 				String line = input.nextLine();
 				String state = line.substring(0, line.indexOf(","));
@@ -554,7 +551,7 @@ class Frame6 extends JFrame {
 				int total = rep + dem + oth;
 				
 				Color c = new Color((rep * 255 / total), (oth * 255 / total), (dem * 255 / total));
-				colors.add(c);
+				colors.put(state, c);
 			}
 			
 			return colors;
