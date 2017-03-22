@@ -23,4 +23,9 @@ public class County
 	{
 		return this.path;
 	}
+	
+	public Color getColor()
+	{
+		return this.color;
+	}
 }

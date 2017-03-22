@@ -43,13 +43,13 @@ class Frame6 extends JFrame {
 	public static String[] states = { "AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS",
 			"KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
 			"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
-			
+	public static int[] years = {1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012};
 	Painting6 painting = new Painting6(year1, counties1);
 
 	public Frame6() {
 		gui = new JFrame();
 		gui.setTitle("Purple");
-
+		init();
 		gui.setSize(800, 495);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -263,13 +263,14 @@ class Frame6 extends JFrame {
 
 		pane.add(painting);
 		gui.setVisible(true);
-		init();
 	}
 
 	public void init() {
+		//Set background color of frame
 		Graphics g = gui.getGraphics();
 		gui.setBackground(Color.WHITE);
 
+		//Read state outlines file/USA.txt
 		File f = new File("data/USA.txt");
 		BufferedReader input1 = null;
 		Scanner input = null;
@@ -288,38 +289,102 @@ class Frame6 extends JFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
-		Graphics2D g2d = (Graphics2D) g;
-
-		AffineTransform transform = new AffineTransform();
-		g2d.setColor(Color.BLACK);
-		g2d.setTransform(transform);
-		transform.scale(13, 16);
-		transform.rotate(Math.toRadians(270));
-		transform.translate(-54, 126);
-
-		for (State s : Painting6.states3) {
-			ArrayList<Path2D> path = s.getStatePath();
-
-			for (Path2D p : path) {
-				Shape shape = transform.createTransformedShape(p);
-				g2d.draw(shape);
-
+		
+		//Loop through and merge duplicate states
+		for(int count = 1; count < Painting6.states3.size(); count++)
+		{
+			if(Painting6.states3.get(count - 1).getName().equals(Painting6.states3.get(count).getName()))
+			{
+				Painting6.states3.get(count - 1).addStatePath(Painting6.states3.get(count).getStatePath().get(0));
+				Painting6.states3.remove(count);
+				count--;
 			}
 		}
 		
-		System.out.println(Painting6.states3.size());
+		//Read each county file
+		for(int j = 0; j < states.length; j++)
+		{
+			File counties = new File("data/" + states[j] + ".txt");
+			Scanner in2 = null;
+			BufferedReader reader2 = null;
+				
+			try
+			{
+				//File file = new File("data/" + states[j] + ".txt");
+				reader2 = new BufferedReader(new FileReader(counties));
+				//getCountyPoints(reader2)
+				in2 = new Scanner(reader2);
+					
+				Painting6.getCountyPoints(in2, j);
+			} catch(FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+		}
+			
+		Painting6.years.put(1960, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1964, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1968, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1972, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1976, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1980, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1984, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1988, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1992, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(1996, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(2000, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(2004, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(2008, (ArrayList<State>) Painting6.states3.clone());
+		Painting6.years.put(2012, (ArrayList<State>) Painting6.states3.clone());
+			
+			
+		for(int i = 0; i < Painting6.states3.size(); i++)
+		{
+			File f4 = new File("data/" + states[i] + "1960.txt");
+			ArrayList<Color> countyColors = new ArrayList<Color>();
+				
+			BufferedReader reader3 = null;
+			Scanner in3 = null;
+			try {
+				reader3 = new BufferedReader(new FileReader(f4));
+
+				in3 = new Scanner(reader3);
+				countyColors = Painting6.getStateColors(in3);
+			}
+
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			in3.close();
+			try {
+				reader3.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			System.out.println(countyColors.size() + " " + Painting6.states3.get(i).getStateCounties().size());
+			
+			for(int count = 0; count < countyColors.size(); count++)
+			{
+				if(count < Painting6.states3.get(i).getStateCounties().size())
+				{
+					Painting6.states3.get(i).getStateCounties().get(count).setColor(countyColors.get(count));
+				}
+			}
+		}
 	}
 
 	static class Painting6 extends JPanel {
 
-		private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
-		private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
-		private static ArrayList<String> stateNames = new ArrayList<String>();
-		private static ArrayList<String> countyNames = new ArrayList<String>();
+		//private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
+		//private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
+		//private static ArrayList<String> stateNames = new ArrayList<String>();
+		//private static ArrayList<String> countyNames = new ArrayList<String>();
 		private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 		private static String year;
 		private static boolean counties1;
+		
+		static HashMap<Integer, ArrayList<State>> years = new HashMap<Integer, ArrayList<State>>();
 
 		static ArrayList<State> states3 = new ArrayList<State>();
 
@@ -332,12 +397,46 @@ class Frame6 extends JFrame {
 		}
 
 		public void paintComponent(Graphics g) {
-
 			super.paintComponent(g);
-			
-			for(int j = 0; j < Frame6.states.length; j++)
-			{
+			Graphics2D g2d = (Graphics2D) g;
+
+			//Set transform to scale/rotate states
+			AffineTransform transform = new AffineTransform();
+			g2d.setColor(Color.BLACK);
+			g2d.setTransform(transform);
+			transform.scale(13, 16);
+			transform.rotate(Math.toRadians(270));
+			transform.translate(-52, 126);
+
+			//Draw states
+			for(State s : Painting6.states3) {
+				ArrayList<Path2D> path = s.getStatePath();
+				ArrayList<County> stateCounties = s.getStateCounties();
 				
+				//Draw counties if "yes" has been selected
+				if(counties1)
+				{
+					for(County c : stateCounties)
+					{
+						Shape shape = transform.createTransformedShape(c.getPath());
+						g2d.draw(shape);
+						
+						g2d.setColor(c.getColor());
+						g2d.fill(shape);
+					}
+				}
+				
+				else
+				{
+					
+				}
+				
+				g2d.setColor(Color.WHITE);
+				
+				for (Path2D p : path) {
+					Shape shape = transform.createTransformedShape(p);
+					g2d.draw(shape);
+				}
 			}
 		}
 
@@ -385,13 +484,13 @@ class Frame6 extends JFrame {
 			}
 		}
 		
-		public static void getCountyPoints(Scanner input) {
+		public static void getCountyPoints(Scanner input, int indx) {
 			while (input.hasNext()) {
 				String county = input.next();
 				String state = input.next();
 				String numPoints = input.next();
 				boolean exception = !Character.isDigit(numPoints.charAt(0)) || numPoints.contains(".");
-
+				
 				while (exception) {
 					try {
 						Integer.parseInt(numPoints);
@@ -429,13 +528,13 @@ class Frame6 extends JFrame {
 				}
 
 				County c = new County(county, path);
-				//counties3.add(c);
+				states3.get(indx).addCounty(c);
 			}
 		}
 		
-		public static void getStateColors(Scanner input) {
+		public static ArrayList<Color> getStateColors(Scanner input) {
 			input.nextLine();
-			int s = 0;
+			ArrayList<Color> colors = new ArrayList<Color>();
 			while (input.hasNext()) {
 				String line = input.nextLine();
 				String state = line.substring(0, line.indexOf(","));
@@ -444,20 +543,21 @@ class Frame6 extends JFrame {
 				String r = line.substring(0, line.indexOf(","));
 				line = line.substring(line.indexOf(",") + 1);
 
-				String ob = line.substring(0, line.indexOf(","));
+				String d = line.substring(0, line.indexOf(","));
 				line = line.substring(line.indexOf(",") + 1);
 
 				String ot = line.substring(0, line.indexOf(","));
 
-				int rom = Integer.parseInt(r);
-				int oba = Integer.parseInt(ob);
+				int rep = Integer.parseInt(r);
+				int dem = Integer.parseInt(d);
 				int oth = Integer.parseInt(ot);
-				int total = rom + oba + oth;
-
-				Color c = new Color((rom * 255 / total), (oth * 255 / total), (oba * 255 / total));
-				stateMap.put(state, c);
-				s++;
+				int total = rep + dem + oth;
+				
+				Color c = new Color((rep * 255 / total), (oth * 255 / total), (dem * 255 / total));
+				colors.add(c);
 			}
+			
+			return colors;
 		}
 	}
 }
