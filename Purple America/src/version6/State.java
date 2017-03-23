@@ -1,4 +1,5 @@
 package version6;
+import java.awt.Color;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
 
@@ -7,6 +8,7 @@ public class State
 	private String name;
 	private ArrayList<Path2D> statePath;
 	private ArrayList<County> stateCounties;
+	private Color color;
 	
 	public State(String name)
 	{
@@ -37,6 +39,11 @@ public class State
 		return this.stateCounties;
 	}
 	
+	public Color getColor()
+	{
+		return this.color;
+	}
+	
 	public void addStatePath(Path2D path)
 	{
 		this.statePath.add(path);
@@ -45,5 +52,10 @@ public class State
 	public void addCounty(County county)
 	{
 		this.stateCounties.add(county);
+	}
+	
+	public void setColor(Color color)
+	{
+		this.color = color;
 	}
 }

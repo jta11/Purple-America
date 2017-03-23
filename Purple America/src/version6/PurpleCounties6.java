@@ -355,8 +355,45 @@ class Frame6 extends JFrame {
 					c.setColor(countyColors.get(c.getName()));
 				}
 			
-				Painting6.years.put(yearsPossible[i], clone);
+				Painting6.yearsC.put(yearsPossible[i], clone);
 			}
+		}
+		
+		for(int i2 = 0; i2 < yearsPossible.length; i2++)
+		{
+			ArrayList<State> clone = new ArrayList<State>();
+			clone = copy(Painting6.states);
+			
+			File f4 = new File("data/USA" + yearsPossible[i2] + ".txt");
+			HashMap<String, Color> colors = new HashMap<String, Color>();
+				
+			BufferedReader reader3 = null;
+			Scanner in3 = null;
+			try {
+				reader3 = new BufferedReader(new FileReader(f4));
+
+				in3 = new Scanner(reader3);
+				colors = Painting6.getStateColors(in3);
+			}
+			
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			in3.close();
+			try {
+				reader3.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			//System.out.println(Painting6.states.get(count).getStateCounties().size());
+			
+			for(State s : clone)
+			{
+				s.setColor(colors.get(s.getName()));
+			}
+		
+			Painting6.yearsS.put(yearsPossible[i2], clone);
 		}
 	}
 	
@@ -383,7 +420,8 @@ class Frame6 extends JFrame {
 
 		private static String year;
 		private static boolean counties1;
-		static HashMap<String, ArrayList<State>> years = new HashMap<String, ArrayList<State>>();
+		static HashMap<String, ArrayList<State>> yearsC = new HashMap<String, ArrayList<State>>();
+		static HashMap<String, ArrayList<State>> yearsS = new HashMap<String, ArrayList<State>>();
 		static ArrayList<State> states = new ArrayList<State>();
 
 		private static final long serialVersionUID = 1L;
@@ -407,7 +445,7 @@ class Frame6 extends JFrame {
 			transform.translate(-52, 126);
 
 			//Draw/fill counties
-			for(State s : years.get(year)) {
+			for(State s : yearsC.get(year)) {
 				ArrayList<County> stateCounties = s.getStateCounties();
 		
 				//Draw counties if "yes" has been selected
@@ -421,18 +459,25 @@ class Frame6 extends JFrame {
 						g2d.setColor(c.getColor());
 						g2d.fill(shape);
 					}
-					//System.out.println(count + s.getName());
 				}
 			}
 			
 			//Draw state outline *also fill states if "no" is selected
-			for(State s : years.get(year))
+			for(State s : yearsS.get(year))
 			{
 				g2d.setColor(Color.BLACK);
 				ArrayList<Path2D> path = s.getStatePath();
 				
 				for (Path2D p : path) {
 					Shape shape = transform.createTransformedShape(p);
+					
+					if(!counties1)
+					{
+						g2d.setColor(s.getColor());
+						g2d.fill(shape);
+					}
+					
+					g2d.setColor(Color.BLACK);
 					g2d.draw(shape);
 				}
 			}
