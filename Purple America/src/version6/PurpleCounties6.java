@@ -43,7 +43,7 @@ class Frame6 extends JFrame {
 	public static String[] states = { "AL", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "ID", "IL", "IN", "IA", "KS",
 			"KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
 			"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
-	public static int[] years = {1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012};
+	public static String[] yearsPossible = {"1960", "1964", "1968", "1972", "1976", "1980", "1984", "1988", "1992", "1996", "2000", "2004", "2008", "2012"};
 	Painting6 painting = new Painting6(year1, counties1);
 
 	public Frame6() {
@@ -266,10 +266,6 @@ class Frame6 extends JFrame {
 	}
 
 	public void init() {
-		//Set background color of frame
-		Graphics g = gui.getGraphics();
-		gui.setBackground(Color.WHITE);
-
 		//Read state outlines file/USA.txt
 		File f = new File("data/USA.txt");
 		BufferedReader input1 = null;
@@ -302,9 +298,9 @@ class Frame6 extends JFrame {
 		}
 		
 		//Read each county file
-		for(int j = 0; j < 1/*states.length*/; j++)
+		for(int j = 0; j < states.length; j++)
 		{
-			File counties = new File("data/DE" + ".txt");
+			File counties = new File("data/" + states[j] + ".txt");
 			Scanner in2 = null;
 			BufferedReader reader2 = null;
 				
@@ -316,57 +312,49 @@ class Frame6 extends JFrame {
 				in2 = new Scanner(reader2);
 					
 				Painting6.getCountyPoints(in2, j);
+				
+				
 			} catch(FileNotFoundException e) {
 				e.printStackTrace();
 			}
 			
 		}
 			
-		Painting6.years.put(1960, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1964, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1968, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1972, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1976, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1980, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1984, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1988, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1992, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(1996, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(2000, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(2004, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(2008, (ArrayList<State>) Painting6.states3.clone());
-		Painting6.years.put(2012, (ArrayList<State>) Painting6.states3.clone());
-			
-		for(int i = 0; i < 1/*Painting6.states3.size()*/; i++)
+		for(int i = 0; i < yearsPossible.length; i++)
 		{
-			File f4 = new File("data/DE" + "1960.txt");
-			HashMap<String, Color> countyColors = new HashMap<String, Color>();
-				
-			BufferedReader reader3 = null;
-			Scanner in3 = null;
-			try {
-				reader3 = new BufferedReader(new FileReader(f4));
-
-				in3 = new Scanner(reader3);
-				countyColors = Painting6.getStateColors(in3);
-			}
-
-			catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			in3.close();
-			try {
-				reader3.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			
-			System.out.println(Painting6.states3.get(i).getName() + " " + countyColors.size() + " " + Painting6.states3.get(i).getStateCounties().size());
-			
-			for(int count = 0; count < Painting6.states3.get(i).getStateCounties().size(); count++)
+			for(int count = 0; count < Painting6.states3.size(); count++)
 			{
-				Painting6.states3.get(i).getStateCounties().get(count).setColor(countyColors.get(Painting6.states3.get(i).getStateCounties().get(count).getName()));
+				File f4 = new File("data/" + states[count] + yearsPossible[i] + ".txt");
+				HashMap<String, Color> countyColors = new HashMap<String, Color>();
+					
+				BufferedReader reader3 = null;
+				Scanner in3 = null;
+				try {
+					reader3 = new BufferedReader(new FileReader(f4));
+
+					in3 = new Scanner(reader3);
+					countyColors = Painting6.getStateColors(in3);
+				}
+				
+				catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				in3.close();
+				try {
+					reader3.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				//System.out.println(Painting6.states3.get(count).getStateCounties().size());
+				
+				for(County c : Painting6.states3.get(count).getStateCounties())
+				{
+					c.setColor(countyColors.get(c.getName()));
+				}
 			}
+			
+			Painting6.years.put(yearsPossible[i], (ArrayList<State>) Painting6.states3.clone());
 		}
 	}
 
@@ -380,7 +368,7 @@ class Frame6 extends JFrame {
 		private static String year;
 		private static boolean counties1;
 		
-		static HashMap<Integer, ArrayList<State>> years = new HashMap<Integer, ArrayList<State>>();
+		static HashMap<String, ArrayList<State>> years = new HashMap<String, ArrayList<State>>();
 
 		static ArrayList<State> states3 = new ArrayList<State>();
 
@@ -404,9 +392,8 @@ class Frame6 extends JFrame {
 			transform.rotate(Math.toRadians(270));
 			transform.translate(-52, 126);
 
-			//Draw states
-			for(State s : Painting6.states3) {
-				ArrayList<Path2D> path = s.getStatePath();
+			//Draw/fill counties
+			for(State s : years.get(year)) {
 				ArrayList<County> stateCounties = s.getStateCounties();
 				
 				//Draw counties if "yes" has been selected
@@ -420,14 +407,15 @@ class Frame6 extends JFrame {
 						g2d.setColor(c.getColor());
 						g2d.fill(shape);
 					}
+					//System.out.println(count + s.getName());
 				}
-				
-				else
-				{
-					
-				}
-				
+			}
+			
+			//Draw state outline *also fill states if "no" is selected
+			for(State s : years.get(year))
+			{
 				g2d.setColor(Color.BLACK);
+				ArrayList<Path2D> path = s.getStatePath();
 				
 				for (Path2D p : path) {
 					Shape shape = transform.createTransformedShape(p);
@@ -500,7 +488,7 @@ class Frame6 extends JFrame {
 						numPoints = input.next();
 					}
 				}
-				System.out.println(county);
+
 				// System.out.println(county + state + numPoints);
 
 				Path2D path = new Path2D.Double();
