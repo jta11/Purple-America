@@ -48,7 +48,7 @@ class Frame6 extends JFrame {
 
 	public Frame6() {
 		gui = new JFrame();
-		gui.setTitle("Purple");
+		gui.setTitle("Purple America");
 		init();
 		gui.setSize(800, 495);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -287,12 +287,12 @@ class Frame6 extends JFrame {
 		}
 		
 		//Loop through and merge duplicate states
-		for(int count = 1; count < Painting6.states3.size(); count++)
+		for(int count = 1; count < Painting6.states.size(); count++)
 		{
-			if(Painting6.states3.get(count - 1).getName().equals(Painting6.states3.get(count).getName()))
+			if(Painting6.states.get(count - 1).getName().equals(Painting6.states.get(count).getName()))
 			{
-				Painting6.states3.get(count - 1).addStatePath(Painting6.states3.get(count).getStatePath().get(0));
-				Painting6.states3.remove(count);
+				Painting6.states.get(count - 1).addStatePath(Painting6.states.get(count).getStatePath().get(0));
+				Painting6.states.remove(count);
 				count--;
 			}
 		}
@@ -319,10 +319,12 @@ class Frame6 extends JFrame {
 			}
 			
 		}
-			
+		
 		for(int i = 0; i < yearsPossible.length; i++)
 		{
-			for(int count = 0; count < Painting6.states3.size(); count++)
+			ArrayList<State> clone = new ArrayList<State>();
+			clone = copy(Painting6.states);
+			for(int count = 0; count < clone.size(); count++)
 			{
 				File f4 = new File("data/" + states[count] + yearsPossible[i] + ".txt");
 				HashMap<String, Color> countyColors = new HashMap<String, Color>();
@@ -346,31 +348,43 @@ class Frame6 extends JFrame {
 					e1.printStackTrace();
 				}
 				
-				//System.out.println(Painting6.states3.get(count).getStateCounties().size());
+				//System.out.println(Painting6.states.get(count).getStateCounties().size());
 				
-				for(County c : Painting6.states3.get(count).getStateCounties())
+				for(County c : clone.get(count).getStateCounties())
 				{
 					c.setColor(countyColors.get(c.getName()));
 				}
+			
+				Painting6.years.put(yearsPossible[i], clone);
+			}
+		}
+	}
+	
+	public ArrayList<State> copy(ArrayList<State> original)
+	{
+		ArrayList<State> duplicate = new ArrayList<State>();
+		
+		for(State s : original)
+		{
+			ArrayList<County> counties = new ArrayList<County>();
+			
+			for(County c : s.getStateCounties())
+			{
+				counties.add(new County(c.getName(), c.getPath(), c.getColor()));
 			}
 			
-			Painting6.years.put(yearsPossible[i], (ArrayList<State>) Painting6.states3.clone());
+			duplicate.add(new State(s.getName(), s.getStatePath(), counties));
 		}
+		
+		return duplicate;
 	}
 
 	static class Painting6 extends JPanel {
 
-		//private static ArrayList<Path2D> states2 = new ArrayList<Path2D>();
-		//private static ArrayList<Path2D> counties = new ArrayList<Path2D>();
-		//private static ArrayList<String> stateNames = new ArrayList<String>();
-		//private static ArrayList<String> countyNames = new ArrayList<String>();
-		private static HashMap<String, Color> stateMap = new HashMap<String, Color>();
 		private static String year;
 		private static boolean counties1;
-		
 		static HashMap<String, ArrayList<State>> years = new HashMap<String, ArrayList<State>>();
-
-		static ArrayList<State> states3 = new ArrayList<State>();
+		static ArrayList<State> states = new ArrayList<State>();
 
 		private static final long serialVersionUID = 1L;
 
@@ -395,7 +409,7 @@ class Frame6 extends JFrame {
 			//Draw/fill counties
 			for(State s : years.get(year)) {
 				ArrayList<County> stateCounties = s.getStateCounties();
-				
+		
 				//Draw counties if "yes" has been selected
 				if(counties1)
 				{
@@ -464,7 +478,7 @@ class Frame6 extends JFrame {
 				}
 
 				s.addStatePath(path);
-				states3.add(s);
+				states.add(s);
 			}
 		}
 		
@@ -513,7 +527,7 @@ class Frame6 extends JFrame {
 				}
 
 				County c = new County(county, path);
-				states3.get(indx).addCounty(c);
+				states.get(indx).addCounty(c);
 			}
 		}
 		

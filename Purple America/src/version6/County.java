@@ -14,6 +14,13 @@ public class County
 		this.path = path;
 	}
 	
+	public County(String name, Path2D path, Color color)
+	{
+		this.name = name;
+		this.path = path;
+		this.color = color;
+	}
+	
 	public void setColor(Color color)
 	{
 		this.color = color;
